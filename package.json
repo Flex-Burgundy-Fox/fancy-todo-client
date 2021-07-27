@@ -1,0 +1,26 @@
+{
+  "name": "fancy-todo-client",
+  "version": "1.0.0",
+  "description": "fancy-todo-client",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/megzgambino/fancy-todo-client.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/megzgambino/fancy-todo-client/issues"
+  },
+  "homepage": "https://github.com/megzgambino/fancy-todo-client#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "jquery": "^3.6.0",
+    "superagent": "^6.1.0"
+  }
+}
