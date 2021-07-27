@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/tohajasper/fancy-todo-client/issues"
   },
-  "homepage": "https://github.com/tohajasper/fancy-todo-client#readme"
+  "homepage": "https://github.com/tohajasper/fancy-todo-client#readme",
+  "dependencies": {}
 }
