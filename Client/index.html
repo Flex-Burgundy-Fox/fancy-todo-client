@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+    
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+    <a class="navbar-brand" href="#">
+      Todo
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-5">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between">
+      <ul class="navbar-nav">
+        <a class="navbar-brand" href="#" id="nav-home"> Home </a>
+      </ul>
+      <span class="navbar-nav">
+        <a class="navbar-brand" href="#" id="nav-register"> Register </a>
+        <a class="navbar-brand" href="#" id="nav-login"> Login </a>
+        <a class="navbar-brand" href="#" id="nav-logout"> logout </a>
+      </span>
+    </div>
+</nav>
+
+<div class="container" id="login-cont">
+    <h2>Login</h2>
+    <form id="form-login">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email-login" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="password-login" placeholder="Enter password">
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+
+<div class="container" id="regis-cont">
+    <h2>Register</h2>
+    <form id="form-register">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email-register" placeholder="Enter email">
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" id="password-register" placeholder="Enter password">
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+<div class="container" id="addTodo-cont">
+    <h2>Add Todo</h2>
+    <form id="form-addTodo">
+      <div class="form-group">
+        <label for="title-add">Title:</label>
+        <input type="title-add" class="form-control" id="title-add" placeholder="Enter Title">
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="description" class="form-control" id="description-add" placeholder="Enter Description">
+      </div>
+      <div class="form-group">
+        <label>Status:</label>
+        <select class="mdb-select validate md-form" id="status-add"   searchable="Search here..">
+          <option value="" disabled selected>Choose Status</option>
+          <option value="Done">Done</option>
+          <option value="Undone">Undone</option>
+        </select>
+      </div>
+      <div id="due-date" class="md-form md-outline input-with-post-icon datepicker" inline="true">
+        <input placeholder="Select date" type="text" id="example" class="form-control">
+        <label for="example">Due Date</label>
+        <i class="fas fa-calendar input-prefix"></i>
+      </div>
+     <div>
+       <button type="submit" class="btn btn-primary">Submit</button>
+     </div>
+    </form>
+</div>
+   
+<div class="container-fluid text-center" id="homepage" >    
+    <button type="button" class="btn btn-primary btn-lg" id="add-button">Add Todo</button>
+    <div class="table-responsive">          
+        <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Status</th>
+                  <th>Due Date</th>
+                  <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Anna</td>
+                    <td>Pitt</td>
+                    <td>35</td>
+                    <td>New York</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" id="edit-button">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" id="delete-button">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Jquery script -->
+<script 
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" 
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
+</script>
+
+<script src="main.js"></script>
+</body>
+</html>
