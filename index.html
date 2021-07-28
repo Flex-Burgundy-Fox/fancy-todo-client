@@ -16,7 +16,7 @@
   <body>
 
     <!-- navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">FancyTodo</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -94,7 +94,7 @@
                 </form>
                 <hr>
                 <div class="mb-3 d-grid gap-2">
-                  <button type="submit" class="btn btn-success" id="register-button">Register</button>
+                  <button type="submit" class="btn btn-success" id="button-register">Register</button>
                 </div>
     
               </div>
@@ -123,7 +123,7 @@
                       <th scope="col">Actions</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="table-todos">
                     <tr>
                       <th scope="row">1</th>
                       <td>Buy groceries for next week</td>
@@ -184,11 +184,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body pb-0">
-            <form>
+            <form id="addTodo-form">
               <label for="title" class="form-label">Title</label>
               <div class="input-group mb-3">
                 <input type="title" class="form-control" id="title" placeholder="Enter a task here" autofocus>
-                <i class="fas fa-calendar-alt fa-lg mx-3 my-3 text-primary" style="cursor: pointer;"></i>
+                <input type="date" class="form-control" name="due_date" id="due_date">
               </div>
               <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
@@ -196,13 +196,14 @@
               </div>
 
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="status" id="status" autocomplete="off" checked>
+                <input type="radio" class="btn-check" name="status" id="status" value="Not Done" autocomplete="off">
                 <label class="btn btn-outline-primary" for="status">In progress</label>
               
-                <input type="radio" class="btn-check" name="status" id="status" autocomplete="off">
+                <input type="radio" class="btn-check" name="status" id="status" value="Done" autocomplete="off">
                 <label class="btn btn-outline-primary" for="status">Finished</label>
               <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
               </div>
+              <a href="#!" data-mdb-toggle="tooltip" title="Choose one status"><i class="fas fa-info-circle"></i></a>
               <div class="modal-footer mt-3">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Save changes</button>
@@ -216,30 +217,8 @@
     <!-- detail todo list -->
     <!-- Modal -->
     <div class="modal fade" id="modal-details" tabindex="-1" aria-labelledby="modal-detailsLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modal-detailsLabel">In progress</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <div class="card">
-              <h5 class="card-header">Buy groceries for next week</h5>
-              <div class="card-body">
-                <h5 class="card-title">2021-07-27</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <!-- <button type="submit" class="btn btn-primary">Edit</button> -->
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-update">
-              Update
-            </button>
-          </div>
-        </div>
+      <div class="modal-dialog" id="modal-dialog-detail">
+        
       </div>
     </div>
 
@@ -256,19 +235,19 @@
             <form>
               <label for="title" class="form-label">Title</label>
               <div class="input-group mb-3">
-                <input type="title" class="form-control" id="title" placeholder="Enter a task here" autofocus>
-                <i class="fas fa-calendar-alt fa-lg mx-3 my-3 text-primary" style="cursor: pointer;"></i>
+                <input type="title" class="form-control" id="title-edit" placeholder="Enter a task here" autofocus>
+                <input type="date" class="form-control" name="due_date" id="due_date-edit">
               </div>
               <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description"></textarea>
+                <textarea class="form-control" id="description-edit"></textarea>
               </div>
 
               <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="status" id="status" autocomplete="off" checked>
+                <input type="radio" class="btn-check" name="status" id="status-inProgress" autocomplete="off">
                 <label class="btn btn-outline-primary" for="status">In progress</label>
               
-                <input type="radio" class="btn-check" name="status" id="status" autocomplete="off">
+                <input type="radio" class="btn-check" name="status" id="status-finished" autocomplete="off">
                 <label class="btn btn-outline-primary" for="status">Finished</label>
               <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
               </div>
