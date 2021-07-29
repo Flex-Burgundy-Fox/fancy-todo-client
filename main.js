@@ -1,15 +1,14 @@
 $(document).ready(function () {
 // console.log('ok masuk')
-beforeLogin()
+if (localStorage.getItem('access_token')) {
+    afterLogin()
+} else {
+    beforeLogin()
+}
 
 //event handling login
 $("#login-form").submit(function (e) { 
     e.preventDefault();
-    if (localStorage.getItem('access_token')) {
-        afterLogin()
-    } else {
-        beforeLogin()
-    }
     
 
     //dapat val dari form login
@@ -47,6 +46,17 @@ $("#nav-logout").click((e) => {
     e.preventDefault()
     localStorage.clear()
     beforeLogin()
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+})
+
+$("#register-user").click((e) => {
+    e.preventDefault()
+    $('#register').show()
+    $('#nav-login').hide()
+    $('#login').hide()
 })
 
 })
@@ -57,6 +67,8 @@ function beforeLogin () {
     $('#nav-logout').hide()  
     $('#formTodo').hide()
     $('#TodoList').hide()
+    $('#register').hide()
+    $('#login').show()
     
 }
 
@@ -71,3 +83,27 @@ function afterLogin () {
     $('#login').hide()
     $('#register').hide()
 }
+
+function onSignIn(googleUser) {
+    // var profile = googleUser.getBasicProfile();
+    // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    // console.log('Name: ' + profile.getName());
+    // console.log('Image URL: ' + profile.getImageUrl());
+    // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    var id_token = googleUser.getAuthResponse().id_token;
+
+    //request with ajax to server
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/" + "users/login-w-google",
+        data: {
+            token: access_token
+        }
+        .done((resp) => {
+        
+        })
+        .fail((err) => {
+
+        })
+    });
+  }

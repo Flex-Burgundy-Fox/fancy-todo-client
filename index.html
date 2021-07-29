@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="242456799503-omiipiferslg6jf5cvs93c4ac6l18s6r.apps.googleusercontent.com">
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -69,7 +70,8 @@
                                 <h6 >Password</h6>
                             </label> <input  type="password" id="login-password" name="password" placeholder="Enter password"> </div>
                         <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
-                        <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small> </div>
+                        <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a id="register-user">Register</a></small> </div>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     </div>
                 </div>
             </div>
@@ -138,30 +140,21 @@
     <br>
     <!-- FORM ADD TODOS BEGIN -->
     <div id="formTodo">
-      <div class="card bg-light mb-3" style="max-width: 18rem;">
-        <form>
-          <div class="mb-3">
-            <label for="title" class="form-label">Todo Title</label>
-            <input type="title" class="form-control" id="title" aria-describedby="emailHelp">
-          </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <input type="password" class="form-control" id="description">
-          </div>
-          <div class="mb-3">
-              <label for="deadline" class="form-label">Deadline</label>
-              <input type="password" class="form-control" id="deadline">
-            </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+      <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header">Todos:</div>
+        <div class="card-body">
+          <h5 class="todo-title" contenteditable="true"> <input type="text" name="title" placeholder="Add your todo title here!"></h5>
+          <p class="todo-details" contenteditable="true"><input type="text" name="description" placeholder="Add your todo description here!"></p>
+          <button type="button" class="btn btn-primary">Submit</button>
+        </div>
       </div>
     </div>
     <!-- FORM ADD TODOS ENDS -->
     <br>
     <br>
     <!-- SHOW TODOS LIST BEGIN -->
-    <div id="TodoList">
-      <div class="card" style="width: 18rem;">
+  <div class="container">
+    <div id="TodoList" class="row row-cols-3">
           <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">Todos:</div>
             <div class="card-body">
@@ -238,6 +231,7 @@
     </div>
     <!-- SHOW TODOS LIST ENDS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="main.js"></script>
   </body>
 </html>
