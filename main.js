@@ -6,6 +6,7 @@ $(document).ready(() => {
 
     $("#loginForm").submit(login);
     $("#registerForm").submit(register);
+    $("#addTodoForm").submit(addTodo)
 });
 
 function beforeLogin(){
@@ -86,9 +87,95 @@ function showTodos(){
     .done(data => {
         $("#todoList").empty();
         data.forEach(todo => {
-            $("#todoList").append(`
-            <li class="list-group-item">${todo.title} <button class="btn btn-danger">Delete</button></li>
-            `);
+
+            let htmlTodo = `
+            
+            <div class="col" id="title">${todo.title}</div>
+
+            <div class="col-6">
+                <button data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
+            `
+
+            if(todo.status === "Done") {
+            htmlTodo += 
+            `
+            <button onclick="patchTodo(${todo.id},'${todo.status}')" class="btn btn-warning">Unfinished</button>
+            <button onclick="deleteTodo(${todo.id})" class="btn btn-danger">Delete</button>
+            </div>`
+            }
+            else {
+            htmlTodo +=
+            `
+            <button onclick="patchTodo(${todo.id},'${todo.status}')"  class="btn btn-success">Finished</button>
+            <button onclick="deleteTodo(${todo.id})" class="btn btn-danger">Delete</button>
+            </div>`
+            }
+
+            $("#todoList").append(htmlTodo);
         });        
     }).fail(err => console.log(err))
+}
+
+function addTodo(e){
+    e.preventDefault()
+    let data = {
+        title : $("#add_title").val(),
+        description : $("#add_description").val(),
+        due_date : $("#add_due_date").val(),
+    }
+    console.log(data);
+    
+    $.ajax({
+        type: "POST",
+        url: server + "/todos",
+        headers : {
+            access_token : localStorage.access_token
+        },
+        data
+    })
+    .done(() => {
+        showTodos()
+    })
+    .fail(err => console.log(err))
+    .always(()=>{
+        $("#add_title").val("");
+        $("#add_description").val("");
+        $("#add_due_date").val("");
+    })
+}
+
+function deleteTodo(todoId){
+    $.ajax({
+        type: "DELETE",
+        url: server + "/todos/" + todoId,
+        headers : {
+            access_token : localStorage.access_token
+        }
+    })
+    .done(() => {
+        showTodos()
+    })
+    .fail(err => console.log(err))
+}
+
+function patchTodo(todoId,todoStatus){
+    // console.log(todo,a);
+    if(todoStatus === "Done"){
+        todoStatus = "Not Done"
+    }else{
+        todoStatus = "Done"
+    }
+
+    $.ajax({
+        type: "PATCH",
+        url: server + "/todos/" + todoId,        
+        data: {status : todoStatus},
+        headers : {
+            access_token : localStorage.access_token
+        }
+    })
+    .done(() => {
+        showTodos()
+    })
+    .fail(err => console.log(err))
 }

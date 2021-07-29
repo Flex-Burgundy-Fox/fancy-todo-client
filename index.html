@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
@@ -16,8 +15,8 @@
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link" id="listTodo" aria-current="page">Todo List</a>
-              <a class="nav-link" id="addTodo">New Todo</a>
-              <a class="nav-link" id="logout" onclick="logout()">Logout</a>
+              <a href="#" class="nav-link" id="addTodo" data-bs-toggle="modal" data-bs-target="#modal-addTodo">New Todo</a>
+              <a class="nav-link" id="logout" onclick=logout()>Logout</a>
             </div>
           </div>
         </div>
@@ -58,22 +57,97 @@
           </form>
         <!-- register form -->
         <!-- todo list -->
-        <div id="todos">
-          <h2 style="text-align: center;">My Todo List</h2>
+        <div id="todos" class="contaier" style="margin-left: 10%; width: 50%;">
+          <h2>My Todo List</h2>
           <br>
-          <div class="card" style="margin-left: 10%; width: 30rem;">
-            <ul class="list-group list-group-flush" id="todoList">
-              
-              <li class="list-group-item">default todo <button class="btn btn-danger">Delete</button></li>
+          <div id="todoList" class="row gy-3 row-cols-2">
 
-            </ul>
-          </div>
+            <!-- todolist here -->
+          </div>  
         </div>
         <!-- todo list -->
 
       </div>
       <!-- body -->
+      <!-- modal addTodo -->
+      <div class="modal fade" id="modal-addTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Todo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addTodoForm">
+
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="string" class="form-control" id="add_title" placeholder="Todo name...">
+                </div>
+
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="add_description" placeholder="Desc..."></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="due_date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="add_due_date">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Confirm</button>
+            </div>
+              </form>
+          </div>
+        </div>
+      </div>
+      <!-- modal addTodo -->
+
+      <!-- modal editTodo -->
+      <!-- <div class="modal fade" id="modal-editTodo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit Todo</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="editTodoForm">
+
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="string" class="form-control" id="add_title" value="Todo name...">
+                </div>
+
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="add_description"></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="due_date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="add_due_date">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+            </div>
+              </form>
+          </div>
+        </div>
+      </div> -->
+      <!-- modal editTodo -->
+      
+      
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script src="main.js" ></script>
 </body>
 </html>
