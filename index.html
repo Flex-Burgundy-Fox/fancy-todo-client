@@ -8,10 +8,10 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
-    <title>Here's Your Todo List!</title>
+    <title>ToDo DoDo!</title>
   </head>
   <body>
-    <center><h1>Your Todo List</h1></center>
+    
     <!-- NAVBAR BEGIN -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
@@ -21,11 +21,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-              <a class="nav-link" href="#">Register</a>
-              <a class="nav-link" href="#">Login</a>
-              <a class="nav-link" href="#">Add Todo(s)</a>
-              <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"></a>
+              <a id="nav-home" aria-current="page" href="#">Home</a>
+              <a id="nav-register" href="#">Register</a>
+              <a id="nav-login" href="#">Login</a>
+              <a id="nav-logout" href="#">Logout</a>
+              <a id="nav-add" href="#">Add Todo(s)</a>
             </div>
           </div>
         </div>
@@ -34,86 +34,141 @@
     <br>
     <br>
     <!-- LOGIN BEGIN -->
-    <form>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1">
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+  <form id="login-form">
+    <div id="login">
+      <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+            <div class="row d-flex">
+                <div class="col-lg-6">
+                    <div class="card1 pb-5">
+                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="https://i.imgur.com/qAXxNMb.png" class="image"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card2 card border-0 px-4 py-5">
+                        <div class="row mb-4 px-3">
+                            <h6 class="mb-0 mr-4 mt-2"></h6>
+                            <div class="facebook text-center mr-3">
+                                <div class="fa fa-facebook"></div>
+                            </div>
+                            <div class="twitter text-center mr-3">
+                                <div class="fa fa-twitter"></div>
+                            </div>
+                            <div class="linkedin text-center mr-3">
+                                <div class="fa fa-linkedin"></div>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-4">
+                            <div class="line"></div> <small class="or text-center">Welcome!</small>
+                            <div class="line"></div>
+                        </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 >Email Address</h6>
+                            </label> <input class="mb-4" type="text" id="login-email" name="email" placeholder="Enter a valid email address"> </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 >Password</h6>
+                            </label> <input  type="password" id="login-password" name="password" placeholder="Enter password"> </div>
+                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
+                        <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a class="text-danger ">Register</a></small> </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </form>
+          <div class="bg-blue py-4">
+              <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
+                  <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+              </div>
+          </div>
+      </div>
+    </div>
     <!-- LOGIN ENDS -->
+    <!-- REGISTER BEGIN-->
+  <form id ="register-form">
+    <div id="register">
+      <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+            <div class="row d-flex">
+                <div class="col-lg-6">
+                    <div class="card1 pb-5">
+                        <div id="logo-Todododo"> <img src="https://i.imgur.com/qAXxNMb.png" class="image"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card2 card border-0 px-4 py-5">
+                        <div class="row mb-4 px-3">
+                            <h6 class="mb-0 mr-4 mt-2"></h6>
+                            <div class="facebook text-center mr-3">
+                                <div class="fa fa-facebook"></div>
+                            </div>
+                            <div class="twitter text-center mr-3">
+                                <div class="fa fa-twitter"></div>
+                            </div>
+                            <div class="linkedin text-center mr-3">
+                                <div class="fa fa-linkedin"></div>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-4">
+                            <div class="line"></div> <small class="or text-center">Register</small>
+                            <div class="line"></div>
+                        </div>
+                      <div id="#registerForm">
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Email Address</h6>
+                            </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Password</h6>
+                            </label> <input type="password" name="password" placeholder="Enter password"> </div>
+                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </form>
+            <div class="bg-blue py-4">
+                <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
+                    <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- REGISTER ENDS-->
     <br>
     <br>
     <!-- FORM ADD TODOS BEGIN -->
-    <form>
-        <div class="mb-3">
-          <label for="title" class="form-label">Todo Title</label>
-          <input type="title" class="form-control" id="title" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Description</label>
-          <input type="password" class="form-control" id="description">
-        </div>
-        <div class="mb-3">
-            <label for="deadline" class="form-label">Deadline</label>
-            <input type="password" class="form-control" id="deadline">
+    <div id="formTodo">
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <form>
+          <div class="mb-3">
+            <label for="title" class="form-label">Todo Title</label>
+            <input type="title" class="form-control" id="title" aria-describedby="emailHelp">
           </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <input type="password" class="form-control" id="description">
+          </div>
+          <div class="mb-3">
+              <label for="deadline" class="form-label">Deadline</label>
+              <input type="password" class="form-control" id="deadline">
+            </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
     <!-- FORM ADD TODOS ENDS -->
     <br>
     <br>
     <!-- SHOW TODOS LIST BEGIN -->
-    <div class="card" style="width: 18rem;">
-        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+    <div id="TodoList">
+      <div class="card" style="width: 18rem;">
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">Todos:</div>
             <div class="card-body">
-              <h5 class="card-title">Primary card title</h5>
+              <h5 class="card-title">Light card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
-            <div class="card-header">Todos:</div>
-            <div class="card-body">
-              <h5 class="card-title">Secondary card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
-            <div class="card-header">Todos:</div>
-            <div class="card-body">
-              <h5 class="card-title">Success card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
-            <div class="card-header">Todos:</div>
-            <div class="card-body">
-              <h5 class="card-title">Danger card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <div class="card text-dark bg-warning mb-3" style="max-width: 18rem;">
-            <div class="card-header">Todos:</div>
-            <div class="card-body">
-              <h5 class="card-title">Warning card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-          <div class="card text-dark bg-info mb-3" style="max-width: 18rem;">
-            <div class="card-header">Todos:</div>
-            <div class="card-body">
-              <h5 class="card-title">Info card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </div>
           <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
@@ -121,15 +176,65 @@
             <div class="card-body">
               <h5 class="card-title">Light card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
             </div>
           </div>
-          <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
             <div class="card-header">Todos:</div>
             <div class="card-body">
-              <h5 class="card-title">Dark card title</h5>
+              <h5 class="card-title">Light card title</h5>
               <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
             </div>
-        </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+      </div>
     </div>
     <!-- SHOW TODOS LIST ENDS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
