@@ -1,23 +1,64 @@
+const url = "http://localhost:3000/"
+
 $(document).ready(function () {
-    console.log(localStorage.getItem("access_token"))
     if (localStorage.getItem("access_token")) {
         afterLogin()
     } else {
         beforeLogin();
-    }        
+    }    
 
-    $("#form-login").submit(login)
     $("#nav-logout").click(logout);
     $("#nav-register").click(register);
+    $("#nav-home").click(function(e) {
+        e.preventDefault()
+        afterLogin()
+    });
+
     $("#add-button").click(function (e) { 
         e.preventDefault();
-        
         $("#homepage").hide();
-        $("#addTodo-cont").show();
-
+        $("#addTodo-cont").show(); 
     });
+
+    $("#form-login").submit(login)
     $("#form-addTodo").submit(addTodo);
+    $("#form-editTodo").submit(postEditTodo);
+    
+    fetchTodo()
 });
+
+function fetchTodo() {
+    $.ajax({
+        type: "GET",
+        url: url + "todos" , 
+        headers: {
+            access_token: localStorage.getItem("access_token"),        
+        }
+    })
+    .done((data) => {
+        console.log(data)
+        $("#table-todo").empty();
+
+        data.result.forEach((el, i) => {
+            $("#table-todo").append(
+                `<tr>
+                    <td>${i+1}</td>
+                    <td>${el.title}</td>
+                    <td>${el.description}</td>
+                    <td>${el.status}</td>
+                    <td>${new Date(el.due_date).toLocaleDateString('id-ID')}</td>
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" id="edit-button" onClick="editTodo(${el.id})">Edit</button>
+                        <button type="button" class="btn btn-danger btn-sm" id="delete-button" onClick="deleteTodo(${el.id})">Delete</button>
+                    </td>
+                </tr>
+                `
+            );
+        });
+    })
+    .fail(err => console.log(err))
+    .always(() => afterLogin)
+}
 
 function beforeLogin(){
     $("#nav-logout").hide();
@@ -26,6 +67,9 @@ function beforeLogin(){
     $("#login-cont").show();
     $("#nav-login").show();
     $("#nav-register").show();
+    $("#addTodo-cont").hide();
+    $("#editTodo-cont").hide();
+
 }
 
 function afterLogin() {
@@ -36,6 +80,8 @@ function afterLogin() {
     $("#homepage").show();
     $("#regis-cont").hide();
     $("#addTodo-cont").hide();
+    $("#editTodo-cont").hide();
+
 }
 
 function login(e) {
@@ -46,14 +92,13 @@ function login(e) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/users/login",
+        url: url + "users/login",
         data: {
             email, 
             password
         }
     })
         .done((data) => {
-            console.log(data)
             localStorage.access_token = data.access_token
             afterLogin()
         })
@@ -74,7 +119,7 @@ function register(e){
     let password = $("#password-login").val()
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/users/register",
+        url: url + "users/register",
         data: {
             email, password
         }
@@ -101,14 +146,11 @@ function addTodo(e) {
     let title = $("#title-add").val()
     let description = $("#description-add").val()
     let status = $("#status-add").val();
-    let due_date = $('.datepicker').datepicker();
-
-
-    console.log(title, description, status, due_date)
+    let due_date = $('#due_date-add').val();
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/todos",
+        url: url + "todos" , 
         data: {
             title, description, status, due_date
         },
@@ -117,10 +159,77 @@ function addTodo(e) {
           },
     })
         .done(data => {
-            console.log(data)
+            $("#homepage").show();
+            $("#addTodo-cont").hide();
+
+            fetchTodo()
         })
         .fail(err => {
             console.log(err);
         })
         .always()
+}
+
+function editTodo(id) {
+    $("#homepage").hide();
+    $("#editTodo-cont").show();
+    localStorage.setItem("todoId", id)
+
+    $.ajax({
+        type: "GET",
+        url: url + "todos/" +  id,
+        headers: {
+            access_token: localStorage.getItem("access_token"),
+        },
+    })
+    .done((todo) => {
+        $("#title-edit").val(`${todo.result.title}`)
+        $("#description-edit").val(`${todo.result.description}`)
+        $("#status-edit option:selected" ).text(`${todo.result.status}`);
+        $('#due_date-edit').val(`${new Date(todo.result.due_date).toLocaleDateString("fr-CA")}`);
+    })
+    .fail((err) => console.log(err))
+}
+
+function postEditTodo(e) {
+    e.preventDefault()
+
+    let title = $("#title-edit").val()
+    let description = $("#description-edit").val()
+    let status = $("#status-edit").val()
+    let due_date = $('#due_date-edit').val()
+
+    $.ajax({
+        type: "PUT",
+        url: url + "todos/" +  localStorage.getItem("todoId"),
+        data: {
+            title, description, status, due_date
+        },
+        headers: {
+            access_token: localStorage.getItem("access_token"),
+        },
+    })
+    .done(() => {
+        $("#homepage").show();
+        $("#editTodo-cont").hide();
+        localStorage.removeItem("todoId")
+
+        fetchTodo()
+    })
+    .fail(err => console.log(err))
+}
+
+function deleteTodo(id) {
+    $.ajax({
+        type: "DELETE",
+        url: url + "todos/" + id,
+        headers: {
+            access_token: localStorage.getItem("access_token"),
+        },
+    })
+    .done(() => {
+        fetchTodo()
+    })
+    .fail((err) => console.log(err))
+
 }

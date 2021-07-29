@@ -111,17 +111,41 @@
           <option value="Undone">Undone</option>
         </select>
       </div>
-      <div id="due-date" class="md-form md-outline input-with-post-icon datepicker" inline="true">
-        <input placeholder="Select date" type="text" id="example" class="form-control">
-        <label for="example">Due Date</label>
-        <i class="fas fa-calendar input-prefix"></i>
-      </div>
+      <label>Due Date:</label>
+      <input type="date" class="form-control" name="due_date" id="due_date-add">
      <div>
        <button type="submit" class="btn btn-primary">Submit</button>
      </div>
     </form>
 </div>
-   
+
+<div class="container" id="editTodo-cont">
+  <h2>Edit Todo</h2>
+  <form id="form-editTodo">
+    <div class="form-group">
+      <label for="title-edit">Title:</label>
+      <input type="title-edit" class="form-control" id="title-edit">
+    </div>
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <input type="description" class="form-control" id="description-edit">
+    </div>
+    <div class="form-group">
+      <label>Status:</label>
+      <select class="mdb-select validate md-form" id="status-edit"   searchable="Search here..">
+        <option value="" disabled selected>Choose Status</option>
+        <option value="Done">Done</option>
+        <option value="Undone">Undone</option>
+      </select>
+    </div>
+    <label>Due Date:</label>
+    <input type="date" class="form-control" name="due_date" id="due_date-edit">
+   <div>
+     <button type="submit" class="btn btn-primary">Submit</button>
+   </div>
+  </form>
+</div>
+ 
 <div class="container-fluid text-center" id="homepage" >    
     <button type="button" class="btn btn-primary btn-lg" id="add-button">Add Todo</button>
     <div class="table-responsive">          
@@ -136,17 +160,17 @@
                   <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="table-todo">
                 <tr>
-                    <td>1</td>
-                    <td>Anna</td>
-                    <td>Pitt</td>
-                    <td>35</td>
-                    <td>New York</td>
+                    <!-- <td>id</td>
+                    <td>title</td>
+                    <td>description</td>
+                    <td>status</td>
+                    <td>due_date</td>
                     <td>
                         <button type="button" class="btn btn-warning btn-sm" id="edit-button">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm" id="delete-button">Delete</button>
-                    </td>
+                    </td> -->
                 </tr>
             </tbody>
         </table>
