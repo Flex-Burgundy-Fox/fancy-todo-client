@@ -39,6 +39,14 @@ $(document).ready(function() {
     addTodo()
   })
 
+  $("#updateTodo-form").submit(function (e) { 
+    e.preventDefault();
+
+    let id = localStorage.getItem("idTodo")
+    
+    updateTodo(id)
+  });
+
 function formRegister() {
   // navbar
   $("#nav-login").show()
@@ -83,6 +91,29 @@ function afterLogin() {
 }
 
 // event handling
+
+$("#register-form").submit(function (e) { 
+  e.preventDefault()
+  
+  const email = $("#register-email").val()
+  const password = $("#register-password").val()
+
+  $.ajax({
+    type: "POST",
+    url: `${baseURL}/users/register`,
+    data: {
+      email, password
+    }
+  })
+    .done(() => {
+      beforeLogin()
+    })
+    .fail((err) => console.log(err))
+    .always(() => {
+      $("#register-email").val("")
+      $("#register-password").val("")
+    })
+})
 
 $("#login-form").submit(function (e) { 
   e.preventDefault()
@@ -237,12 +268,16 @@ function editTodo(id) {
     }
   })
     .done(({ todo }) => {
+      localStorage.setItem("idTodo", todo.id)
+
       $("#title-edit").val(todo.title),
       $("#description-edit").val(todo.description)
       
-      if(todo.status === "Not Done") {
+      if (todo.status === "Not Done") {
         $("#status-inProgress").attr("checked", true)
+        // $("#status-finished").attr("checked", false)
       } else {
+        // $("#status-inProgress").attr("checked", false)
         $("#status-finished").attr("checked", true)
       }
 
@@ -252,10 +287,18 @@ function editTodo(id) {
 }
 
 function updateTodo(id) {
+  let status
+
+  if ($("#status-inProgress").val() === "on") {
+    status = "Not Done"
+  } else {
+    status = "Done"
+  }
+
   const input = {
     title: $("#title-edit").val(),
     description: $("#description-edit").val(),
-    status: "Not Done",
+    status,
     due_date: $("#due_date-edit").val(),
     UserId: localStorage.getItem("access_token")
   }
@@ -267,9 +310,12 @@ function updateTodo(id) {
     headers: {
       access_token: localStorage.getItem("access_token")
     }
-      .done((todo) => console.log(todo))
-      .fail((err) => console.log(err))
   })
+    .done((todo) => {
+      fetchTodos()
+      console.log(todo)
+    })
+    .fail((err) => console.log(err))
 }
 
 function destroyTodo(id) {
