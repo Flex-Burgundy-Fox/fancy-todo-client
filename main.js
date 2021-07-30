@@ -7,7 +7,51 @@ if (localStorage.getItem('access_token')) {
 }
 
 //event handling login
-$("#login-form").submit(function (e) { 
+$("#login-form").submit(userLogin)
+
+$("#nav-logout").click(userLogout)
+
+$("#register-user").click((e) => {
+    e.preventDefault()
+    $('#register').show()
+    $('#nav-login').hide()
+    $('#login').hide()
+})
+
+$("#nav-register").click((e) => {
+    e.preventDefault()
+    $('#register').show()
+    $('#nav-login').hide()
+    $('#login').hide()
+})
+
+})
+
+function beforeLogin () {
+    $('.navbar-brand').hide() 
+    $('#nav-home').hide() 
+    $('#nav-logout').hide()  
+    $('#formTodo').hide()
+    $('#TodoList').hide()
+    $('#register').hide()
+    $('#login').show()
+    
+}
+
+function afterLogin () {
+    $('#nav-home').show()
+    $('#nav-login').hide()  
+    $('#nav-register').hide()  
+    $('#nav-logout').show()  
+    $('#formTodo').show()
+    $('#TodoList').show()
+    $('#login').hide()
+    $('#register').hide()
+
+    showTodos()
+}
+
+function userLogin(e) {
     e.preventDefault();
     
 
@@ -40,9 +84,9 @@ $("#login-form").submit(function (e) {
         $("#login-password").val("")
     })
     
-})
+}
 
-$("#nav-logout").click((e) => {
+function userLogout(e) {
     e.preventDefault()
     localStorage.clear()
     beforeLogin()
@@ -50,38 +94,6 @@ $("#nav-logout").click((e) => {
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
-})
-
-$("#register-user").click((e) => {
-    e.preventDefault()
-    $('#register').show()
-    $('#nav-login').hide()
-    $('#login').hide()
-})
-
-})
-
-function beforeLogin () {
-    $('#nav-home').hide()
-    $('#nav-add').hide()  
-    $('#nav-logout').hide()  
-    $('#formTodo').hide()
-    $('#TodoList').hide()
-    $('#register').hide()
-    $('#login').show()
-    
-}
-
-function afterLogin () {
-    $('#nav-home').show()
-    $('#nav-add').show()  
-    $('#nav-login').hide()  
-    $('#nav-register').hide()  
-    $('#nav-logout').show()  
-    $('#formTodo').show()
-    $('#TodoList').show()
-    $('#login').hide()
-    $('#register').hide()
 }
 
 function onSignIn(googleUser) {
@@ -97,13 +109,46 @@ function onSignIn(googleUser) {
         type: "POST",
         url: "http://localhost:3000/" + "users/login-w-google",
         data: {
-            token: access_token
+            access_token : id_token
         }
         .done((resp) => {
-        
+        console.log(resp)
         })
         .fail((err) => {
 
         })
     });
-  }
+}
+
+function showTodos() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:3000/todos/",
+        headers: {
+            access_token : localStorage.getItem('access_token')
+        }
+    })
+    .done(({ result }) => {
+        // console.log(result)
+        $("#TodoList").empty()
+        result.forEach((todo) => {
+            let date = todo.due_date.split('T')[0]
+            $("#TodoList").append(`
+            <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">${todo.title}</h5>
+              <p class="card-text">${todo.description}</p>
+              <p class="card-text">${date}</p>
+         </div>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>`)
+        })
+
+    })
+    .fail(err => {
+        console.log(err)
+    })
+}
