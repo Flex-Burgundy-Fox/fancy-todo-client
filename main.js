@@ -30,6 +30,9 @@ $(document).ready(function() {
     e.preventDefault()
     
     localStorage.clear()
+
+    logout()
+
     beforeLogin()
   })
 
@@ -46,6 +49,60 @@ $(document).ready(function() {
     
     updateTodo(id)
   });
+
+  // event handling
+
+  $("#register-form").submit(function (e) { 
+    e.preventDefault()
+    
+    const email = $("#register-email").val()
+    const password = $("#register-password").val()
+
+    $.ajax({
+      type: "POST",
+      url: `${baseURL}/users/register`,
+      data: {
+        email, password
+      }
+    })
+      .done(() => {
+        beforeLogin()
+      })
+      .fail((err) => console.log(err))
+      .always(() => {
+        $("#register-email").val("")
+        $("#register-password").val("")
+      })
+  })
+
+  $("#login-form").submit(function (e) { 
+    e.preventDefault()
+
+    const email = $("#login-email").val()
+    const password = $("#login-password").val()
+    
+    $.ajax({
+      type: "POST",
+      url: `${baseURL}/users/login`,
+      data: {
+        email, password
+      }
+    })
+      .done((data) => {
+        localStorage.setItem("access_token", data.access_token)
+
+        afterLogin()
+      })
+      .fail((err) => {
+        // show notif fail login
+        console.log(err)
+      })
+      .always(() => {
+        $("#login-email").val("")
+        $("#login-password").val("")
+      })
+  })
+})
 
 function formRegister() {
   // navbar
@@ -72,6 +129,30 @@ function beforeLogin() {
   $("#todo-list").hide()
 }
 
+// getBasicProfile() 
+function onSignIn(googleUser) {
+  // const profile = googleUser.getBasicProfile();
+  // console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+  // console.log('Name: ' + profile.getName());
+  // console.log('Image URL: ' + profile.getImageUrl());
+  // console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+  const id_token = googleUser.getAuthResponse().id_token;
+
+  $.ajax({
+    type: "POST",
+    url: `${baseURL}/users/google-login`,
+    data: {
+      token: id_token
+    }
+  })
+    .done((data) => {
+      localStorage.setItem("access_token", data.access_token)
+        
+      afterLogin()
+    })
+    .fail((err) => console.log(err))
+}
+
 function afterLogin() {
   // navbar
   $("#nav-register").hide()
@@ -90,58 +171,13 @@ function afterLogin() {
   fetchTodos()
 }
 
-// event handling
-
-$("#register-form").submit(function (e) { 
-  e.preventDefault()
-  
-  const email = $("#register-email").val()
-  const password = $("#register-password").val()
-
-  $.ajax({
-    type: "POST",
-    url: `${baseURL}/users/register`,
-    data: {
-      email, password
-    }
-  })
-    .done(() => {
-      beforeLogin()
-    })
-    .fail((err) => console.log(err))
-    .always(() => {
-      $("#register-email").val("")
-      $("#register-password").val("")
-    })
-})
-
-$("#login-form").submit(function (e) { 
-  e.preventDefault()
-
-  const email = $("#login-email").val()
-  const password = $("#login-password").val()
-  
-  $.ajax({
-    type: "POST",
-    url: `${baseURL}/users/login`,
-    data: {
-      email, password
-    }
-  })
-    .done((data) => {
-      localStorage.setItem("access_token", data.access_token)
-      afterLogin()
-    })
-    .fail((err) => {
-      // show notif fail login
-      console.log(err)
-    })
-    .always(() => {
-      $("#login-email").val("")
-      $("#login-password").val("")
-    })
-})
-})
+// logout with google sign-out
+function logout() {
+  const auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
 
 function fetchTodos() {
   $.ajax({
