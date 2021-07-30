@@ -1,5 +1,5 @@
 const server = "http://localhost:3000"
-
+let editTodoId 
 $(document).ready(() => {
     if(localStorage.getItem("access_token")) afterLogin()
     else beforeLogin()
@@ -7,6 +7,7 @@ $(document).ready(() => {
     $("#loginForm").submit(login);
     $("#registerForm").submit(register);
     $("#addTodoForm").submit(addTodo)
+    $("#editTodoForm").submit(editTodo)
 });
 
 function beforeLogin(){
@@ -93,7 +94,7 @@ function showTodos(){
             <div class="col" id="title">${todo.title}</div>
 
             <div class="col-6">
-                <button data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
+                <button onclick="viewEditForm(${todo.id})" data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
             `
 
             if(todo.status === "Done") {
@@ -123,7 +124,6 @@ function addTodo(e){
         description : $("#add_description").val(),
         due_date : $("#add_due_date").val(),
     }
-    console.log(data);
     
     $.ajax({
         type: "POST",
@@ -173,6 +173,71 @@ function patchTodo(todoId,todoStatus){
         headers : {
             access_token : localStorage.access_token
         }
+    })
+    .done(() => {
+        showTodos()
+    })
+    .fail(err => console.log(err))
+}
+
+function viewEditForm(todoId){
+    // console.log(todo,a);
+
+    $.ajax({
+        type: "GET",
+        url: server + "/todos/" + todoId,        
+        headers : {
+            access_token : localStorage.access_token
+        }
+    })
+    .done(todo => {
+        $("#editTodoForm").empty();
+        let due_date = todo.due_date.split('T')[0]
+        editTodoId = todo.id
+        let htmlEditForm = `
+        
+            <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="string" class="form-control" id="edit_title" value="${todo.title}">
+                </div>
+
+                <div class="mb-3">
+                  <label for="description" class="form-label">Description</label>
+                  <textarea class="form-control" id="edit_description">${todo.description}</textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label for="due_date" class="form-label">Date</label>
+                  <input type="date" class="form-control" id="edit_due_date" value="${due_date}">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+            </div>
+            `
+
+        $("#editTodoForm").append(htmlEditForm);
+    })
+    .fail(err => console.log(err))
+}
+
+function editTodo(e){
+    e.preventDefault()
+    let data = {
+        title : $("#edit_title").val(),
+        description : $("#edit_description").val(),
+        due_date : $("#edit_due_date").val(),
+    }
+    
+    $.ajax({
+        type: "PUT",
+        url: server + "/todos/" + editTodoId,
+        headers : {
+            access_token : localStorage.access_token
+        },
+        data
     })
     .done(() => {
         showTodos()
