@@ -59,6 +59,8 @@ function loginHandler(e) {
 function fetchTodos() {
     let due_notes = ''
     let badge_color = ''
+    let checkStatus = ''
+    let strikethrough = ''
 
     $.ajax({
         type: "GET",
@@ -95,15 +97,25 @@ function fetchTodos() {
                         badge_color = "bg-green-500"
                     }
 
+                    if (todo.status === "Closed") {
+                        checkStatus = "checked"
+                        strikethrough = "line-through"
+                    } else {
+                        checkStatus = ''
+                        strikethrough = ''
+                    }
+
                     $("#todo-body").append(`
                         <div class="w-full mx-auto pt-5">
                             <div class="shadow-xl">
                                 <div class="tab w-full flex  overflow-hidden rounded-lg bg-gray-600">
                                     <div style="width: 88%">
                                         <input class="absolute opacity-0 " id="todo-${todo.id}" type="radio" name="RadioTodo">
-                                       
-                                        <label class=" block p-5 text-gray-200 " for="todo-${todo.id}">${todo.title} <span
-                                        class=" h-4 p-1 mr-2 text-xs text-gray-100 ${badge_color} rounded-full">${due_notes}</span></label>
+
+                                         <label class=" block p-5 text-gray-200 ${strikethrough}" for="todo-${todo.id}">
+                                         <input class ="p-10 transform scale-125" type="checkbox" id="check-todo-${todo.id}" ${checkStatus} value="${todo.id}" 
+                                         onChange="changeStatus(${todo.id})"> &nbsp; ${todo.title} <span
+                                         class=" h-4 p-1 mr-2 text-xs text-gray-100 ${badge_color} rounded-full">${due_notes}</span></label>
 
                                         <div class="tab-content overflow-hidden  bg-gray-300 text-gray-700 ">
                                             <input id="title-${todo.id}" type="text"
@@ -151,6 +163,8 @@ function fetchTodos() {
                     }
                 };
             }
+
+
         })
         .fail(err => {
             console.log(err)
@@ -196,9 +210,6 @@ function editTodos(idTodo) {
             fetchTodos();
         })
         .fail(err => {
-            console.log(err.responseJSON.error)
-            console.log(err);
-
             $("#error-edit").text(err.responseJSON.error);
             document.getElementById('myModal').showModal()
         });
@@ -253,4 +264,32 @@ function closeAddTodos() {
     $("#new-due_date").val("");
     $("#error-add").val("");
     document.getElementById('addModal').close()
+}
+
+function changeStatus(idTodo) {
+    let whichCheckbox = "#check-todo-" + idTodo
+    let status = ''
+
+    if ($(whichCheckbox).prop('checked')) {
+        status = 'Closed'
+    } else {
+        status = 'Open'
+    }
+
+    $.ajax({
+        type: "PATCH",
+        url: "http://localhost:3000/todos/" + idTodo,
+        headers: {
+            token: localStorage.getItem("token"),
+        },
+        data: {
+            status
+        }
+    })
+        .done(data => {
+            fetchTodos();
+        })
+        .fail(err => {
+            console.log(err)
+        });
 }
