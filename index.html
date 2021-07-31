@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-------------------------------- client ID untuk google sign in ------------------------------>
+        <meta name="google-signin-client_id"
+            content="934221082126-h14m3mu1trthae2m6nonf6t0mvhu6ouo.apps.googleusercontent.com">
+
+
+        <link href="/tailwind.css" rel="stylesheet">
+        <link href="collapsible.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://kit-pro.fontawesome.com/releases/v5.15.1/css/pro.min.css" />
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div class="min-w-screen min-h-screen bg-gray-800 flex items-center justify-center px-5 py-5">
+
+            <!-------------------------------- login ----------------------------------->
+            <div id="login-form">
+
+                <div
+                    class="flex flex-col bg-gray-400 shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-8 rounded-md w-full max-w-md">
+                    <div class="font-medium self-center pb-5 text-l sm:text-l uppercase text-gray-800">Login To Your
+                        Account</div>
+
+                    <div class="g-signin2 self-center " data-onsuccess="onSignIn">
+                        <!-- <span class=" absolute left-0 top-0 flex items-center justify-center h-full w-10  ">
+                            <i class="mdi mdi-google"></i></span> -->
+                        <!-- <span>Login with Google</span> -->
+                    </div>
+
+                    <div class="relative mt-8 h-px bg-gray-300">
+                        <div class="absolute left-0 top-0 flex justify-center w-full -mt-2">
+                            <span class="bg-gray-200 px-4 text-xs text-gray-500 uppercase">Or Login With
+                                Email</span>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <form action="#">
+                            <div class="flex flex-col mb-3 ">
+                                <label for="email" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-700">E-Mail
+                                    Address:</label>
+                                <div class="relative">
+                                    <div
+                                        class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                                        <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path
+                                                d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                                        </svg>
+                                    </div>
+
+                                    <input id="login-email" type="email" name="email"
+                                        class=" text-sm sm:text-sm placeholder-gray-500 pl-10 pr-4 rounded-lg border bg-gray-200 border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                                        placeholder="E-Mail Address" />
+                                </div>
+                            </div>
+                            <div class="flex flex-col mb-3">
+                                <label for="password"
+                                    class="mb-1 text-xs sm:text-sm tracking-wide text-gray-700">Password:</label>
+                                <div class="relative">
+                                    <div
+                                        class="inline-flex items-center justify-center absolute left-0 top-0 h-full w-10 text-gray-400">
+                                        <span>
+                                            <svg class="h-5 w-5" fill="none" stroke-linecap="round"
+                                                stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                                stroke="currentColor">
+                                                <path
+                                                    d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                            </svg>
+                                        </span>
+                                    </div>
+
+                                    <input id="login-password" type="password" name="password"
+                                        class="text-sm sm:text-sm placeholder-gray-500 pl-10 pr-4 rounded-lg border bg-gray-200 border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                                        placeholder="Password" />
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col mb-3">
+                                <label id="error-login"
+                                    class="mb-1 text-xs sm:text-xs tracking-wide italic font-bold text-red-800"></label>
+                            </div>
+
+                            <div class="flex w-full">
+                                <button type="submit"
+                                    class="flex items-center justify-center focus:outline-none text-gray-200 text-sm sm:text-base bg-gray-800 hover:bg-gray-700 rounded py-2 w-full transition duration-150 ease-in">
+                                    <span class="mr-2 uppercase">Login</span>
+                                    <span>
+                                        <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </span>
+                                </button>
+                            </div>
+                            <br>
+                            <div class="flex w-full">
+                                <button id="btn-register" type="button"
+                                    class="flex items-center justify-center focus:outline-none text-gray-200 text-sm sm:text-base bg-gray-800 hover:bg-gray-700 rounded py-2 w-full transition duration-150 ease-in">
+                                    <span class="mr-2 uppercase">Register <i
+                                            class="mdi mdi-account-plus-outline"></i></span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- <div class="flex justify-center items-center mt-6">
+                        <a href="#" target="_blank"
+                            class="inline-flex items-center font-bold text-gray-500 hover:text-gray-800 text-sm text-center">
+                            <span>
+                                <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path
+                                        d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                                </svg>
+                            </span>
+                            <span class="ml-2">Don't have an account?</span>
+                        </a>
+                    </div> -->
+                </div>
+
+            </div>
+
+            <!--------------------------------------------------  Border --------------------------------------------------------->
+            <div id="todo-container"
+                class="w-full mx-auto rounded-lg border border-gray-500 p-8 lg:py-12 lg:px-14 text-gray-300"
+                style="max-width: 800px">
+
+                <!----------------------- Idea lamp ------------------------->
+                <div class="flex justify-between">
+                    <div class="">
+                        <h1 class="text-2xl font-bold"><i
+                                class="mdi mdi-lightbulb-on text-yellow-300 text-3xl leading-none align-bottom"></i>
+                            &nbsp; Todos</h1>
+                    </div>
+                    <div id="nav-logout">
+                        <h1 class="mdi mdi-logout text-2xl text-gray-600 hover:text-yellow-300 font-bold"></h1>
+                    </div>
+                </div>
+
+                <div id="todo-body" class="mb-10">
+                    <!----------------- todo content here-------------------->
+                    <!-- <div class="w-full mx-auto pt-5">
+                    <div class="shadow-xl">
+                        <div class="tab w-full flex overflow-hidden rounded-lg bg-gray-600">
+                            <div style="width: 88%">
+                                <input class="absolute opacity-0 " id="todo-1" type="radio" name="RadioTodo">
+                                <label class=" block p-5 text-gray-200 " for="todo-1">Title <span
+                                        class=" h-4 p-1 mr-2 text-xs text-gray-100 bg-red-400 rounded-full">Due
+                                        ${todo.due_date2}</span></label>
+
+                                <div class="tab-content overflow-hidden  bg-gray-200 text-gray-800 ">
+                                    <input type="text"
+                                        class="form-control w-full p-5 overflow-hidden bg-gray-200 text-gray-600 "
+                                        placeholder="Title here ..." value="title" />
+                                </div>
+
+                                <div class="tab-content overflow-hidden  bg-gray-200 text-gray-800 ">
+                                    <input type="text"
+                                        class="form-control w-full p-5 overflow-hidden bg-gray-200 text-gray-600 "
+                                        placeholder="Description here ..." value="desc" />
+                                </div>
+
+                                <div class="flex tab-content overflow-hidden  bg-gray-200 text-gray-800">
+                                    <label class="w-3/10 p-5 text-gray-600">Due Date:</label>
+
+                                    <input class="form-control  p-4 overflow-hidden bg-gray-200 text-gray-600 "
+                                        type="date" value="2021-07-29" min="2021-07-29" max="2023-12-31">
+                                </div>
+
+                            </div>
+                            <div style="width: 12%" class="flex justify-center text-2xl">
+                                <button class="py-4 px-1 text-gray-400 hover:text-gray-200" onClick="deleteTodos(1)"
+                                    title="Delete"><i class="mdi mdi-trash-can-outline"></i></button>
+                                <button class="py-4 px-1 text-gray-400 hover:text-gray-200" onClick="editTodos(1)"
+                                    title="Save"><i class="mdi mdi-content-save-outline"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+                    <!----------------- end todo content here-------------------->
+                </div>
+
+                <!-----------------  add button-------------------->
+                <div class="flex justify-center pt-5">
+                    <button id="add-form"
+                        class=" py-1 px-10 border border-gray-800 hover:border-gray-500 rounded-lg text-xl"><i
+                            class="mdi mdi-plus"></i></button>
+                    <button id="btn-dashboard"
+                        class=" py-1 px-10 border border-gray-800 hover:border-gray-500 rounded-lg text-xl"><i
+                            class="mdi mdi-chart-bar"></i></button>
+                </div>
+            </div>
+
+
+            <!------------------------------ modal ------------------------------------>
+            <!-- <section class=" flex h-screen w-screen p-10 justify-center items-start">
+            <button onclick="document.getElementById('myModal').showModal()" id="btn"
+                class="py-3 px-10 bg-gray-800 text-white rounded text shadow-xl">Open</button>
+        </section> -->
+
+
+            <!---------------------------- modal dashboard ------------------------------>
+            <dialog id="dashModal" class="h-6/6 w-7/12 p-5 bg-gray-200 rounded-lg ">
+
+                <div class="w-auto h-auto  ">
+                    <!-- Header -->
+                    <div class="flex w-auto h-auto pb-3 justify-center items-center ">
+                        <div
+                            class="flex w-10/12 h-auto py-3 justify-center items-center text-gray-500 text-2xl font-bold">
+                            Todos Statistics per User
+                        </div>
+
+                        <div onclick="document.getElementById('dashModal').close();"
+                            class="flex w-1/12 h-6 justify-center cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#1D2633" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <!--Header End-->
+                    </div>
+
+                    <!-- Modal Content-->
+                    <img id="img_dashboard" class="justify-center" alt="chart" width="600" height="400"></p>
+
+
+                    <!-- End of Modal Content-->
+                </div>
+            </dialog>
+            <!---------------------------- end of modal dashboard ------------------------------>
+
+            <!---------------------------- modal add ------------------------------>
+            <dialog id="addModal" class="h-5/6 w-6/12 p-5 bg-gray-600 rounded-lg ">
+
+                <div class="flex flex-col w-full h-auto  ">
+                    <!-- Header -->
+                    <div class="flex w-full h-auto pb-3 justify-center items-center ">
+                        <div
+                            class="flex w-10/12 h-auto py-3 justify-center items-center text-gray-300 text-2xl font-bold">
+                            Add New Todo
+                        </div>
+                        <div onClick="closeAddTodos()" class="flex w-1/12 h-6 justify-center cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <!--Header End-->
+                    </div>
+
+                    <!-- Modal Content-->
+
+                    <div class="bg-gray-300 text-gray-700 ">
+                        <input id="new-title" type="text"
+                            class="form-control w-full px-5 pt-2 pb-2 overflow-hidden bg-gray-300 text-gray-500 "
+                            placeholder="Title here ..." />
+                    </div>
+
+                    <div class="h-24 bg-gray-200 text-gray-700 ">
+                        <textarea id="new-description" type="textarea"
+                            class="form-control w-full items-start h-24 px-10 pt-2 overflow-hidden bg-gray-200 text-gray-500 "
+                            placeholder="Description here ..."></textarea>
+                    </div>
+
+                    <div class="flex bg-gray-200 text-gray-700">
+                        <label class="w-2/10 px-10 pt-2 text-gray-500">Due:</label>
+
+                        <input id="new-due_date" class="form-control pt-1 overflow-hidden bg-gray-200 text-gray-500 "
+                            type="date">
+                    </div>
+
+                    <div class="bg-gray-200 text-gray-700">
+                        <textarea id="error-add"
+                            class="mb-1 p-5 w-full h-auto text-xs sm:text-xs tracking-wide italic font-bold text-red-700"
+                            disabled></textarea>
+                    </div>
+                    <!-----------------  save button-------------------->
+                    <div class="flex justify-end pt-5">
+                        <button id="add-submit" onClick="addTodos()"
+                            class=" py-1 px-5 border border-gray-600 hover:border-gray-500 rounded-lg text-4xl text-gray-300"><i
+                                class="mdi mdi-content-save-move"></i></button>
+                    </div>
+
+                    <!-- End of Modal Content-->
+                </div>
+            </dialog>
+            <!---------------------------- end of modal add ------------------------------>
+
+            <!---------------------------- modal error edit ------------------------------>
+            <dialog id="myModal" class="h-5/12 w-5/12 p-5 bg-gray-300 rounded-md ">
+
+                <div class="flex flex-col w-full h-auto ">
+                    <!-- Header -->
+                    <div class="flex w-full h-auto justify-center items-center">
+                        <div
+                            class="flex w-10/12 h-auto py-3 justify-center items-center text-gray-600 text-2xl font-bold">
+                            Error!
+                        </div>
+                        <div onclick="document.getElementById('myModal').close();"
+                            class="flex w-1/12 h-6 justify-center cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-x">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </div>
+                        <!--Header End-->
+                    </div>
+
+                    <!-- Modal Content-->
+                    <div id="error-edit"
+                        class="flex w-full h-auto py-10 px-2 justify-center items-center bg-gray-200 rounded text-center text-gray-500">
+                        This is a text inside the modal
+                    </div>
+                    <!-- End of Modal Content-->
+                </div>
+            </dialog>
+            <!---------------------------- end of modal error edit ------------------------------>
+
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+            <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+            <script src="main.js"></script>
+
+            <script>
+                export default {
+                    data() {
+                        return {
+                            value1: '',
+                            value2: ''
+                        };
+                    }
+                };
+            </script>
+
+    </body>
+
+</html>
