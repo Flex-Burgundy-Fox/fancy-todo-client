@@ -33,6 +33,8 @@ function afterLogin(){
 
 function logout(){
     delete localStorage.access_token
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut()
     beforeLogin()
 }
 
@@ -48,7 +50,7 @@ function login(e) {
         data
     })
     .done(({access_token}) => {
-        localStorage.setItem('access_token',access_token)
+        localStorage.setItem('access_token', access_token)
         afterLogin()
     }).fail(err => console.log(err))
     .always(()=>{
@@ -87,33 +89,49 @@ function showTodos(){
     })
     .done(data => {
         $("#todoList").empty();
-        data.forEach(todo => {
-
-            let htmlTodo = `
-            
-            <div class="col" id="title">${todo.title}</div>
-
-            <div class="col-6">
-                <button onclick="viewEditForm(${todo.id})" data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
+        let htmlTodo
+        if(!data.length) {
+            htmlTodo = 
             `
-
-            if(todo.status === "Done") {
-            htmlTodo += 
+            <p><em>You don't have any todo, you can add some todo from navbar below</em></p>
             `
-            <button onclick="patchTodo(${todo.id},'${todo.status}')" class="btn btn-warning">Unfinished</button>
-            <button onclick="deleteTodo(${todo.id})" class="btn btn-danger">Delete</button>
-            </div>`
-            }
-            else {
-            htmlTodo +=
-            `
-            <button onclick="patchTodo(${todo.id},'${todo.status}')"  class="btn btn-success">Finished</button>
-            <button onclick="deleteTodo(${todo.id})" class="btn btn-danger">Delete</button>
-            </div>`
-            }
-
             $("#todoList").append(htmlTodo);
-        });        
+        }else{
+
+            data.forEach(todo => {
+                
+                htmlTodo = `
+                <div class="row gx-5 my-3" style="height: 40px;">
+                <div class="col-sm-3 py-1" id="title">
+                <div class="form-check">
+                `
+    
+                if(todo.status === "Done") {
+                    htmlTodo += 
+                    `<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onclick="patchTodo(${todo.id},'${todo.status}')" checked>`
+                
+                }else {
+                    htmlTodo +=
+                    `<input class="form-check-input" type="checkbox" value="" onclick="patchTodo(${todo.id},'${todo.status}')" id="flexCheckDefault">`
+                
+                }
+    
+                htmlTodo += 
+                `
+                <label class="form-check-label" for="flexCheckDefault">${todo.title}</label>
+                </div>
+                </div>
+                <div class="col-sm-3 py-1 overflow-auto" style="height: 40px;">${todo.description}</div>
+                <div class="col-sm">
+                    <button onclick="viewEditForm(${todo.id})" data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
+                    <button onclick="deleteTodo(${todo.id},0)" data-bs-toggle="modal" data-bs-target="#modal-deleteTodo"class="btn btn-danger">Delete</button>
+                </div>
+                </div>
+                `
+    
+                $("#todoList").append(htmlTodo);
+            });        
+        }
     }).fail(err => console.log(err))
 }
 
@@ -144,21 +162,32 @@ function addTodo(e){
     })
 }
 
-function deleteTodo(todoId){
-    $.ajax({
-        type: "DELETE",
-        url: server + "/todos/" + todoId,
-        headers : {
-            access_token : localStorage.access_token
-        }
-    })
-    .done(() => {
-        showTodos()
-    })
-    .fail(err => console.log(err))
+function deleteTodo(todoId, deleteCode){
+    if(deleteCode === 1){
+
+        $.ajax({
+            type: "DELETE",
+            url: server + "/todos/" + todoId,
+            headers : {
+                access_token : localStorage.access_token
+            }
+        })
+        .done(() => {
+            showTodos()
+        })
+        .fail(err => console.log(err))
+    }else{
+        $("#modal-deleteFooter").empty();
+        let deleteButton = 
+        `
+        <button onclick="deleteTodo(${todoId},1)" type="button" class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        `
+        $("#modal-deleteFooter").append(deleteButton);
+    }
 }
 
-function patchTodo(todoId,todoStatus){
+function patchTodo(todoId, todoStatus){
     // console.log(todo,a);
     if(todoStatus === "Done"){
         todoStatus = "Not Done"
@@ -241,6 +270,23 @@ function editTodo(e){
     })
     .done(() => {
         showTodos()
+    })
+    .fail(err => console.log(err))
+}
+
+function onSignIn(googleUser) {
+    
+    var id_token = googleUser.getAuthResponse().id_token;
+    $.ajax({
+        type: "POST",
+        url: server + "/login-google",
+        data: {
+            token : id_token
+        },
+    })
+    .done(({access_token}) => {
+        localStorage.setItem('access_token', access_token)
+        afterLogin()    
     })
     .fail(err => console.log(err))
 }
