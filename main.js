@@ -122,7 +122,7 @@ function showTodos(){
                 </div>
                 </div>
                 <div class="col-sm-3 py-1 overflow-auto" style="height: 50px;">${todo.description}</div>
-                <div class="col-sm-auto py-1">${todo.due_date.split('T')[0]}</div>
+                <div class="col-sm-auto py-1"><em>due at ${todo.due_date.split('T')[0]}</em></div>
                 <div class="col-sm-auto">
                     <button onclick="viewEditForm(${todo.id})" data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
                     <button onclick="deleteTodo(${todo.id},0)" data-bs-toggle="modal" data-bs-target="#modal-deleteTodo"class="btn btn-danger">Delete</button>
