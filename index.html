@@ -9,6 +9,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <title>ToDo DoDo!</title>
   </head>
   <body>
@@ -91,7 +92,7 @@
     </div>
     <!-- LOGIN ENDS -->
     <!-- REGISTER BEGIN-->
-  <form id ="register-form">
+  <form id="register-form">
     <div id="register">
       <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
         <div class="card card0 border-0">
@@ -122,16 +123,16 @@
                       <div id="#registerForm">
                         <div class="row px-3"> <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Email Address</h6>
-                            </label> <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address"> </div>
+                            </label> <input class="mb-4" type="text" id="register-email"  name="email" placeholder="Enter a valid email address"> </div>
                         <div class="row px-3"> <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Password</h6>
-                            </label> <input type="password" name="password" placeholder="Enter password"> </div>
+                            </label> <input type="password" id="register-password" name="password" placeholder="Enter password"> </div>
                         <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
                     </div>
                   </div>
                 </div>
             </div>
-          </form>
+  </form>
             <div class="bg-light py-4">
                 <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
                     <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
@@ -144,23 +145,43 @@
     <br>
     <br>
     <!-- FORM ADD TODOS BEGIN -->
-    <div id="formTodo">
-      <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
-        <div class="card-header">Todos:</div>
+    <form id="todo-form">
+      <div class="card text-dark bg-light mb-3"style="max-width: 18rem;">
+        <div class="card-header">Add Todos:</div>
         <div class="card-body">
-          <h5 class="todo-title" contenteditable="true"> <input type="text" name="title" placeholder="Add your todo title here!"></h5>
-          <p class="todo-details" contenteditable="true"><input type="text" name="description" placeholder="Add your todo description here!"></p>
-          <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control" />
-            <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-            </span>
-         </div>
-          <button type="button" class="btn btn-primary">Submit</button>
+          <label class="control-label" for="title">Title</label>
+          <h5 class="todo-title" contenteditable="true"> <input type="text" id="title-add" placeholder="Add your todo title here!"></h5>
+          <label class="control-label" for="title">Description</label>
+          <textarea class="todo-details" contenteditable="true" id="description-add" placeholder="Add your todo description here!"></textarea>
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Deadline</label>
+            <input class="form-control" id="date" placeholder="Choose the deadline date!" type="date"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
     <!-- FORM ADD TODOS ENDS -->
+    <br>
+    <br>
+     <!-- FORM EDIT TODOS BEGIN -->
+     <form id="todo-edit">
+      <div class="card bg-warning mb-3"style="max-width: 18rem;">
+        <div class="card-header">Edit Todos:</div>
+        <div class="card-body">
+          <label class="control-label" for="title">Title</label>
+          <h5 class="todo-title" contenteditable="true"> <input type="text" id="title-edit" placeholder="Add your todo title here!"></h5>
+          <label class="control-label" for="title">Description</label>
+          <textarea class="todo-details" contenteditable="true" id="description-edit" placeholder="Add your todo description here!"></textarea>
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Deadline</label>
+            <input class="form-control" id="date-edit" placeholder="Choose the deadline date!" type="date"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- FORM EDIT TODOS ENDS -->
     <br>
     <br>
     <!-- SHOW TODOS LIST BEGIN -->
@@ -241,13 +262,22 @@
     </div>
   </div>
     <!-- SHOW TODOS LIST ENDS -->
-    <script type="text/javascript">
-      $(function () {
-          $('#datetimepicker1').datetimepicker();
-      });
-   </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <!-- <script>
+      $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        var options={
+          format: 'yyyy-mm-dd',
+          container: container,
+          todayHighlight: true,
+          autoclose: true,
+        };
+        date_input.datepicker(options);
+      })
+    </script> -->
     <script src="main.js"></script>
   </body>
 </html>
