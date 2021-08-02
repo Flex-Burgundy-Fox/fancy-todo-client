@@ -101,7 +101,7 @@ function showTodos(){
             data.forEach(todo => {
                 
                 htmlTodo = `
-                <div class="row gx-5 my-3" style="height: 40px;">
+                <div class="row my-3" style="height: 50px;">
                 <div class="col-sm-3 py-1" id="title">
                 <div class="form-check">
                 `
@@ -121,8 +121,9 @@ function showTodos(){
                 <label class="form-check-label" for="flexCheckDefault">${todo.title}</label>
                 </div>
                 </div>
-                <div class="col-sm-3 py-1 overflow-auto" style="height: 40px;">${todo.description}</div>
-                <div class="col-sm">
+                <div class="col-sm-3 py-1 overflow-auto" style="height: 50px;">${todo.description}</div>
+                <div class="col-sm-auto py-1">${todo.due_date.split('T')[0]}</div>
+                <div class="col-sm-auto">
                     <button onclick="viewEditForm(${todo.id})" data-bs-toggle="modal" data-bs-target="#modal-editTodo" class="btn btn-primary">Edit</button>
                     <button onclick="deleteTodo(${todo.id},0)" data-bs-toggle="modal" data-bs-target="#modal-deleteTodo"class="btn btn-danger">Delete</button>
                 </div>
@@ -236,7 +237,7 @@ function viewEditForm(todoId){
                 </div>
 
                 <div class="mb-3">
-                  <label for="due_date" class="form-label">Date</label>
+                  <label for="due_date" class="form-label">Due Date</label>
                   <input type="date" class="form-control" id="edit_due_date" value="${due_date}">
                 </div>
 
