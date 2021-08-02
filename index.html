@@ -21,49 +21,66 @@
     <!-- navbar -->
     <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-white">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">FancyTodo</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand" id="id-navbar-brand" href="#">FancyTodo</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav ms-auto">
-            <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-            <a class="nav-link" href="#" id="nav-addTodo" data-bs-toggle="modal" data-bs-target="#modal-add">
-              Add Todo
-            </a>
-            <a class="nav-link" href="#" id="nav-register">Register</a>
-            <a class="nav-link" href="#" id="nav-login">Login</a>
-            <a class="nav-link" href="#" id="nav-logout">Logout</a>
-          </div>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nav-register">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="nav-login">Login</a>
+            </li>
+            <li class="nav-item" id="welcome">
+              <a class="nav-link" href="#" style="pointer-events: none; color: black;">Welcome,</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown-addTodo-logout" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="display: inline-block;">
+                <span>Dropdown link</span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdown-addTodo-logout">
+                <li>
+                  <a class="nav-link" href="#" id="nav-addTodo">Add Todo</a>
+                </li>
+                <li>
+                  <a class="nav-link" href="#" id="nav-logout">Logout</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
 
     <!-- form register -->
-    <section class="vh-100" id="form-register" style="background-color: #eee;">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-lg-9 col-xl-5">
-            <div class="card rounded-3">
-              <div class="card-body p-4">
+    <section id="form-register">
+      <div class="container pt-3">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col col-lg-9 col-xl-6">
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
     
-                <h4 class="text-center my-3 pb-3">Register</h4>
+                  <h4 class="text-center my-3 pb-3">Register</h4>
+      
+                  <form id="register-form">
+                    <div class="mb-3">
+                      <label for="register-email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="register-email" aria-describedby="register-email-help" placeholder="example@mail.com" autofocus required>
+                      <div id="register-email-help" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="register-password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="register-password" placeholder="Minimum length must be 8 characters.">
+                    </div>
+                    <div class="mb-3 d-grid gap-2">
+                      <button type="submit" class="btn btn-success">Register</button>
+                    </div>
+                  </form>
     
-                <form id="register-form">
-                  <div class="mb-3">
-                    <label for="register-email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="register-email" aria-describedby="register-email-help" placeholder="example@mail.com" autofocus required>
-                    <div id="register-email-help" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="register-password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="register-password" placeholder="Minimum length must be 8 characters.">
-                  </div>
-                  <div class="mb-3 d-grid gap-2">
-                    <button type="submit" class="btn btn-success">Register</button>
-                  </div>
-                </form>
-    
+                </div>
               </div>
             </div>
           </div>
@@ -72,33 +89,36 @@
     </section>
 
     <!-- form login -->
-    <section class="vh-100" id="form-login" style="background-color: #eee;">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-lg-9 col-xl-5">
-            <div class="card rounded-3">
-              <div class="card-body p-4">
+    <section id="form-login">
+      <div class="container pt-3">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col col-lg-9 col-xl-6">
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
     
-                <h4 class="text-center my-3 pb-3">Login</h4>
+                  <h4 class="text-center my-3 pb-3">Login</h4>
+      
+                  <form id="login-form">
+                    <div class="mb-3">
+                      <label for="login-email" class="form-label">Email address</label>
+                      <input type="email" class="form-control" id="login-email" aria-describedby="login-email-help" placeholder="example@mail.com" autofocus required>
+                      <div id="login-email-help" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="login-password" class="form-label">Password</label>
+                      <input type="password" class="form-control" id="login-password" placeholder="Minimum length must be 8 characters.">
+                    </div>
+                    <div class="mb-3 d-grid gap-2">
+                      <button type="submit" class="btn btn-primary btn-block" id="login-button">Login</button>
+                    </div>
+                  </form>
+
+                  <hr>
+                  <p class="text-center">Or log in using:</p>
+                  <div class="g-signin2 text-center d-flex justify-content-center" data-onsuccess="onSignIn"></div>
     
-                <form id="login-form">
-                  <div class="mb-3">
-                    <label for="login-email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="login-email" aria-describedby="login-email-help" placeholder="example@mail.com" autofocus required>
-                    <div id="login-email-help" class="form-text">We'll never share your email with anyone else.</div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="login-password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="login-password" placeholder="Minimum length must be 8 characters.">
-                  </div>
-                  <div class="mb-3 d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-block" id="login-button">Login</button>
-                  </div>
-                </form>
-                <hr>
-                <p class="text-center">Or log in using:</p>
-                <div class="g-signin2 text-center d-flex justify-content-center" data-onsuccess="onSignIn"></div>
-    
+                </div>
               </div>
             </div>
           </div>
@@ -107,68 +127,66 @@
     </section>
 
     <!-- todo list -->
-    <section class="vh-100" id="todo-list" style="background-color: #eee;">
-      <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+    <section id="table-todoList">
+      <div class="container pt-3">
+        <div class="row d-flex justify-content-center align-items-center">
           <div class="col col-lg-9 col-xl-10">
-            <div class="card rounded-3">
-              <div class="card-body p-4">
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+      
+                  <h4 class="text-center my-3 pb-3">My Todo</h4>
     
-                <h4 class="text-center my-3 pb-3">My Todo</h4>
-    
-                <table class="table mb-4">
-                  <thead>
-                    <tr>
-                      <th scope="col">No.</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody id="table-todos">
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Buy groceries for next week</td>
-                      <td>In progress</td>
-                      <td>
-                        
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal-details">
-                          Detail
-                        </button>
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        <button type="submit" class="btn btn-success btn-sm">Finished</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Renew car insurance</td>
-                      <td>In progress</td>
-                      <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal-details">
-                          Detail
-                        </button>
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        <button type="submit" class="btn btn-success btn-sm">Finished</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Sign up for online course</td>
-                      <td>In progress</td>
-                      <td>
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#modal-details">
-                          Detail
-                        </button>
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        <button type="submit" class="btn btn-success btn-sm">Finished</button>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-    
+                  <table class="table mb-4">
+                    <thead>
+                      <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="table-todos">
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Buy groceries for next week</td>
+                        <td>In progress</td>
+                        <td>
+                          <button type="button" class="btn btn-info btn-sm">
+                            Detail
+                          </button>
+                          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                          <button type="submit" class="btn btn-success btn-sm">Finished</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Renew car insurance</td>
+                        <td>In progress</td>
+                        <td>
+                          <button type="button" class="btn btn-info btn-sm">
+                            Detail
+                          </button>
+                          <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                          <button type="submit" class="btn btn-success btn-sm">Finished</button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Sign up for online course</td>
+                        <td>In progress</td>
+                        <td>
+                          <button type="button" class="btn btn-info btn-sm">
+                            Detail
+                          </button>
+                          <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                          <button type="submit" class="btn btn-success btn-sm">Finished</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  
+                </div>
               </div>
             </div>
           </div>
@@ -177,95 +195,116 @@
     </section>
 
     <!-- add todo list -->
-    <!-- Modal -->
-    <div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="modal-detailsLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modal-detailsLabel">Add Todo</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body pb-0">
-            <form id="addTodo-form">
-              <label for="title" class="form-label">Title</label>
-              <div class="input-group mb-3">
-                <input type="title" class="form-control" id="title" placeholder="Enter a task here" autofocus>
-                <input type="date" class="form-control" name="due_date" id="due_date">
-              </div>
-              <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description"></textarea>
-              </div>
-
-              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="status" id="status" value="Not Done" autocomplete="off">
-                <label class="btn btn-outline-primary" for="status">In progress</label>
+    <section id="form-addTodo">
+      <div class="container pt-3">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col col-lg-9 col-xl-10">
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+      
+                  <h4 class="text-center my-3 pb-3">Add Todo</h4>
+  
+                  <form id="addTodo-form">
+                    <label for="title" class="form-label">Title</label>
+                    <div class="input-group mb-3">
+                      <input type="title" class="form-control" id="title" placeholder="Enter a task here" autofocus>
+                      <input type="date" class="form-control" name="due_date" id="due_date">
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description</label>
+                      <textarea class="form-control" id="description"></textarea>
+                    </div>
               
-                <input type="radio" class="btn-check" name="status" id="status" value="Done" autocomplete="off">
-                <label class="btn btn-outline-primary" for="status">Finished</label>
-              <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                      <input type="radio" class="btn-check" name="status" id="status" autocomplete="off" value="Not Done" checked>
+                      <label class="btn btn-outline-primary" for="status">Not Done</label>
+                    
+                      <input type="radio" class="btn-check" name="status" id="status" autocomplete="off" value="Done">
+                      <label class="btn btn-outline-primary" for="status">Done</label>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary fa-pull-right ms-2">
+                      Save changes
+                    </button>
+                    <button type="button" class="btn btn-secondary fa-pull-right" id="close-addTodo">Close</button>
+                    <div class="d-grid gap-2">
+                    </div>
+                  </form>
+  
+                </div>
               </div>
-              <a href="#!" data-mdb-toggle="tooltip" title="Choose one status"><i class="fas fa-info-circle"></i></a>
-              <div class="modal-footer mt-3">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- detail todo list -->
-    <!-- Modal -->
-    <div class="modal fade" id="modal-details" tabindex="-1" aria-labelledby="modal-detailsLabel" aria-hidden="true">
-      <div class="modal-dialog" id="modal-dialog-detail">
-        
-      </div>
-    </div>
+    <section id="card-detailTodo">
+      <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col col-lg-9 col-xl-10">
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+      
+                  <h4 class="text-center my-3 pb-3">Detail Todo</h4>
 
-    <!-- update todo list -->
-    <!-- Modal -->
-    <div class="modal fade" id="modal-update" tabindex="-1" aria-labelledby="modal-detailsLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modal-detailsLabel">Update Todo</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body pb-0">
-            <form id="updateTodo-form">
-              <label for="title" class="form-label">Title</label>
-              <div class="input-group mb-3">
-                <input type="title" class="form-control" id="title-edit" placeholder="Enter a task here" autofocus>
-                <input type="date" class="form-control" name="due_date" id="due_date-edit">
+                  <h5 class="card-title">Special title treatment</h5>
+                  <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
               </div>
-              <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description-edit"></textarea>
-              </div>
-
-              <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="status" id="status-inProgress" autocomplete="off">
-                <label class="btn btn-outline-primary" for="status">In progress</label>
-              
-                <input type="radio" class="btn-check" name="status" id="status-finished" autocomplete="off">
-                <label class="btn btn-outline-primary" for="status">Finished</label>
-              <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-              </div>
-              <div class="modal-footer mt-3">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <!-- <button type="submit" class="btn btn-primary">Update</button> -->
-                <!-- Button trigger modal -->
-                <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-update">
-                  Save changes
-                </button>
-              </div>
-            </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- update todo list -->
+    <section id="form-updateTodo">
+      <div class="container pt-3">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col col-lg-9 col-xl-10">
+            <div class="shadow-lg p-3 mb-5 bg-body rounded">
+              <div class="card rounded-3">
+                <div class="card-body p-4">
+      
+                  <h4 class="text-center my-3 pb-3">Update Todo</h4>
+
+                  <form id="updateTodo-form">
+                    <label for="title" class="form-label">Title</label>
+                    <div class="input-group mb-3">
+                      <input type="title" class="form-control" id="title-edit" placeholder="Enter a task here" autofocus>
+                      <input type="date" class="form-control" name="due_date" id="due_date-edit">
+                    </div>
+                    <div class="mb-3">
+                      <label for="description" class="form-label">Description</label>
+                      <textarea class="form-control" id="description-edit"></textarea>
+                    </div>
+              
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                      <input type="radio" class="btn-check" name="status" id="status-inProgress" autocomplete="off">
+                      <label class="btn btn-outline-primary" for="status">Not Done</label>
+                    
+                      <input type="radio" class="btn-check" name="status" id="status-finished" autocomplete="off">
+                      <label class="btn btn-outline-primary" for="status">Done</label>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary fa-pull-right ms-2">
+                      Save changes
+                    </button>
+                    <button type="button" class="btn btn-secondary fa-pull-right" id="close-updateTodo">Close</button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -282,6 +321,9 @@
     
     <!-- Library Google Platform -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+    <!-- SweetAlert 2 -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="main.js"></script>
    
