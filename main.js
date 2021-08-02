@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
 // console.log('ok masuk')
 if (localStorage.getItem('access_token')) {
@@ -108,6 +109,22 @@ function userLogin(e) {
     // console.log(password)
 
     //masuk ke ajax
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
     $.ajax({
         type: "POST",
         url: "http://localhost:3000/users/login",
@@ -123,6 +140,12 @@ function userLogin(e) {
 
     })
     .fail(err => {
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: 'Wrong Email/Password!'
+          })
         console.log(err)
     })
     .always(() =>{
@@ -140,6 +163,8 @@ function userLogout(e) {
     auth2.signOut().then(function () {
       console.log('User signed out.');
     });
+
+    Swal.fire('You have sucessfully logged out!')
 }
 
 function onSignIn(googleUser) {
@@ -152,6 +177,22 @@ function onSignIn(googleUser) {
     // console.log(id_token)
 
     //request with ajax to server
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: 'Signed in successfully'
+      })
     $.ajax({
         type: "POST",
         url: "http://localhost:3000/users/login-w-google",
@@ -195,7 +236,7 @@ function showTodos() {
                         <button type="button" class="btn btn-success" onClick="statusEdit(${todo.id},${todo.status})">Done</button>
                         <button type="button" class="btn btn-warning" onClick="showFormEditTodos(${todo.id})">Edit</button>
                         <button type="button" class="btn btn-danger" onClick="deleteTodos(${todo.id})">Delete</button>
-                        
+                       
                     </div>
                 </div>`)
             } else {
@@ -207,7 +248,7 @@ function showTodos() {
                         <p class="card-text"><s>${todo.description}</s></p>
                         <p class="card-text"><s>${date}</s></p>
                     </div>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-danger" onClick="deleteTodos(${todo.id})">Delete</button>
                     </div>
                 </div>`)
             }
@@ -258,19 +299,36 @@ function addTodos(e) {
 
 function deleteTodos(id) {
 
-    $.ajax({
-        type: "DELETE",
-        url: `http://localhost:3000/todos/${id}`,
-        headers: {
-            access_token : localStorage.getItem('access_token')
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+          $.ajax({
+            type: "DELETE",
+            url: `http://localhost:3000/todos/${id}`,
+            headers: {
+                access_token : localStorage.getItem('access_token')
+            }
+        })
+        .done(() => {
+            afterLogin()
+        })
+        .fail((err) => {
+            console.log(err)
+        })
         }
-    })
-    .done(() => {
-        afterLogin()
-    })
-    .fail((err) => {
-        console.log(err)
-    })
+      })
 }
 
 function showFormEditTodos(id) {
@@ -300,24 +358,39 @@ function editTodos (e) {
     let description = $("#description-edit").val()
     let due_date = $("#date-edit").val()
 
-    $.ajax({
-        type: "PUT",
-        url: `http://localhost:3000/todos/${localStorage.getItem('IdTodo')}`,
-        data: {
-            title,
-            description,
-            due_date
-        },
-        headers: {
-            access_token : localStorage.getItem('access_token')
+    Swal.fire({
+        title: 'Do you want to save the changes?',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: `Save`,
+        denyButtonText: `Don't save`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "PUT",
+                url: `http://localhost:3000/todos/${localStorage.getItem('IdTodo')}`,
+                data: {
+                    title,
+                    description,
+                    due_date
+                },
+                headers: {
+                    access_token : localStorage.getItem('access_token')
+                }
+            })
+            .done(() => {
+                afterLogin()
+            })
+            .fail((err) => {
+                console.log(err)
+            })
+          Swal.fire('Saved!', '', 'success')
+        } else if (result.isDenied) {
+          Swal.fire('Changes are not saved', '', 'info')
+          afterLogin()
         }
-    })
-    .done(() => {
-        afterLogin()
-    })
-    .fail((err) => {
-        console.log(err)
-    })
+      })
 
 }
 
