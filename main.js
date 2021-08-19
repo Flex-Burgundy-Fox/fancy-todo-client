@@ -78,7 +78,7 @@ function userRegister(e) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/users/register",
+        url: "https://todo-dodo.herokuapp.com/users/register",
         data: {
             email,
             password
@@ -127,7 +127,7 @@ function userLogin(e) {
       })
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/users/login",
+        url: "https://todo-dodo.herokuapp.com/users/login",
         data: {
             email,
             password
@@ -195,7 +195,7 @@ function onSignIn(googleUser) {
       })
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/users/login-w-google",
+        url: "https://todo-dodo.herokuapp.com/users/login-w-google",
         data: {
             token : id_token
         }
@@ -213,7 +213,7 @@ function onSignIn(googleUser) {
 function showTodos() {
     $.ajax({
         type: "GET",
-        url: "http://localhost:3000/todos/",
+        url: "https://todo-dodo.herokuapp.com/todos/",
         headers: {
             access_token : localStorage.getItem('access_token')
         }
@@ -273,7 +273,7 @@ function addTodos(e) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:3000/todos/",
+        url: "https://todo-dodo.herokuapp.com/todos/",
         data: {
            title,
            description,
@@ -316,7 +316,7 @@ function deleteTodos(id) {
           )
           $.ajax({
             type: "DELETE",
-            url: `http://localhost:3000/todos/${id}`,
+            url: `https://todo-dodo.herokuapp.com/todos/${id}`,
             headers: {
                 access_token : localStorage.getItem('access_token')
             }
@@ -336,7 +336,7 @@ function showFormEditTodos(id) {
     $('#todo-edit').show()
     $.ajax({
         type: "GET",
-        url: `http://localhost:3000/todos/${id}`,
+        url: `https://todo-dodo.herokuapp.com/todos/${id}`,
         headers: {
             access_token : localStorage.getItem('access_token')
         }
@@ -369,7 +369,7 @@ function editTodos (e) {
         if (result.isConfirmed) {
             $.ajax({
                 type: "PUT",
-                url: `http://localhost:3000/todos/${localStorage.getItem('IdTodo')}`,
+                url: `https://todo-dodo.herokuapp.com/todos/${localStorage.getItem('IdTodo')}`,
                 data: {
                     title,
                     description,
@@ -399,7 +399,7 @@ function statusEdit(id, todoStatus) {
 
     $.ajax({
         type: "PATCH",
-        url: `http://localhost:3000/todos/${id}`,
+        url: `https://todo-dodo.herokuapp.com/todos/${id}`,
         data: {
             status: todoStatus
         },
