@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="242456799503-omiipiferslg6jf5cvs93c4ac6l18s6r.apps.googleusercontent.com">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+    <title>ToDo DoDo!</title>
+  </head>
+  <body>
+    
+    <!-- NAVBAR BEGIN -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Todo Dodo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" id="nav-home" href="#">Home</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="nav-register" href="#">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="nav-login" href="#">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="nav-logout" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- NAVBAR ENDS -->
+    <br>
+    <br>
+    <!-- LOGIN BEGIN -->
+  <form id="login-form">
+    <div id="login">
+      <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+            <div class="row d-flex">
+                <div class="col-lg-6">
+                    <div class="card1 pb-5">
+                        <div class="row px-3 justify-content-center"> <img src="https://i.imgur.com/2wCt0tE.png" class="image"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card2 card border-0 px-4 py-5">
+                        <div class="row mb-4 px-3">
+                            <h6 class="mb-0 mr-4 mt-2"></h6>
+                            <div class="facebook text-center mr-3">
+                                <div class="fa fa-facebook"></div>
+                            </div>
+                            <div class="twitter text-center mr-3">
+                                <div class="fa fa-twitter"></div>
+                            </div>
+                            <div class="linkedin text-center mr-3">
+                                <div class="fa fa-linkedin"></div>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-4">
+                            <div class="line"></div> <small class="or text-center">Hello</small>
+                            <div class="line"></div>
+                        </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 >Email Address</h6>
+                            </label> <input class="mb-4" type="text" id="login-email" name="email" placeholder="Enter a valid email address"> </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 >Password</h6>
+                            </label> <input  type="password" id="login-password" name="password" placeholder="Enter password"> </div>
+                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Login</button> </div>
+                        <div class="row mb-4 px-3"> <small class="font-weight-bold">Don't have an account? <a id="register-user">Register</a></small> </div>
+                        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </form>
+          <div class="bg-light py-4">
+              <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
+                  <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- LOGIN ENDS -->
+    <!-- REGISTER BEGIN-->
+  <form id="register-form">
+    <div id="register">
+      <div class="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
+        <div class="card card0 border-0">
+            <div class="row d-flex">
+                <div class="col-lg-6">
+                    <div class="card1 pb-5">
+                        <div class="row px-3 justify-content-center mt-4 mb-5 border-line" id="logo-Todododo"> <img src="https://i.imgur.com/2wCt0tE.png" class="image"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card2 card border-0 px-4 py-5">
+                        <div class="row mb-4 px-3">
+                            <h6 class="mb-0 mr-4 mt-2"></h6>
+                            <div class="facebook text-center mr-3">
+                                <div class="fa fa-facebook"></div>
+                            </div>
+                            <div class="twitter text-center mr-3">
+                                <div class="fa fa-twitter"></div>
+                            </div>
+                            <div class="linkedin text-center mr-3">
+                                <div class="fa fa-linkedin"></div>
+                            </div>
+                        </div>
+                        <div class="row px-3 mb-4">
+                            <div class="line"></div> <small class="or text-center">Register</small>
+                            <div class="line"></div>
+                        </div>
+                      <div id="#registerForm">
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Email Address</h6>
+                            </label> <input class="mb-4" type="text" id="register-email"  name="email" placeholder="Enter a valid email address"> </div>
+                        <div class="row px-3"> <label class="mb-1">
+                                <h6 class="mb-0 text-sm">Password</h6>
+                            </label> <input type="password" id="register-password" name="password" placeholder="Enter password"> </div>
+                        <div class="row mb-3 px-3"> <button type="submit" class="btn btn-blue text-center">Register</button> </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+  </form>
+            <div class="bg-light py-4">
+                <div class="row px-3"> <small class="ml-4 ml-sm-5 mb-2">Copyright &copy; 2021. All rights reserved.</small>
+                    <div class="social-contact ml-4 ml-sm-auto"> <span class="fa fa-facebook mr-4 text-sm"></span> <span class="fa fa-google-plus mr-4 text-sm"></span> <span class="fa fa-linkedin mr-4 text-sm"></span> <span class="fa fa-twitter mr-4 mr-sm-5 text-sm"></span> </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- REGISTER ENDS-->
+    <br>
+    <br>
+    <!-- FORM ADD TODOS BEGIN -->
+    <form id="todo-form">
+      <div class="card text-dark bg-light mb-3"style="max-width: 18rem;">
+        <div class="card-header">Add Todos:</div>
+        <div class="card-body">
+          <label class="control-label" for="title">Title</label>
+          <h5 class="todo-title" contenteditable="true"> <input type="text" id="title-add" placeholder="Add your todo title here!"></h5>
+          <label class="control-label" for="title">Description</label>
+          <textarea class="todo-details" contenteditable="true" id="description-add" placeholder="Add your todo description here!"></textarea>
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Deadline</label>
+            <input class="form-control" id="date" placeholder="Choose the deadline date!" type="date"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- FORM ADD TODOS ENDS -->
+    <br>
+    <br>
+     <!-- FORM EDIT TODOS BEGIN -->
+     <form id="todo-edit">
+      <div class="card bg-warning mb-3"style="max-width: 18rem;">
+        <div class="card-header">Edit Todos:</div>
+        <div class="card-body">
+          <label class="control-label" for="title">Title</label>
+          <h5 class="todo-title" contenteditable="true"> <input type="text" id="title-edit" placeholder="Add your todo title here!"></h5>
+          <label class="control-label" for="title">Description</label>
+          <textarea class="todo-details" contenteditable="true" id="description-edit" placeholder="Add your todo description here!"></textarea>
+          <div class="form-group"> <!-- Date input -->
+            <label class="control-label" for="date">Deadline</label>
+            <input class="form-control" id="date-edit" placeholder="Choose the deadline date!" type="date"/>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- FORM EDIT TODOS ENDS -->
+    <br>
+    <br>
+    <!-- SHOW TODOS LIST BEGIN -->
+  <div class="container">
+    <div id="TodoList" class="row row-cols-3">
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+          <div class="card text-dark bg-light mb-3" style="max-width: 18rem;">
+            <div class="card-header">Todos:</div>
+            <div class="card-body">
+              <h5 class="card-title">Light card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <button type="button" class="btn btn-success">Done</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+    </div>
+  </div>
+    <!-- SHOW TODOS LIST ENDS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
